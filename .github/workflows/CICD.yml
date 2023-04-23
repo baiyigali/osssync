@@ -1,0 +1,21 @@
+name: CI/CD
+on:
+  workflow_dispatch:
+  push:
+    branches: ['master']
+    
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout Code
+      uses: actions/checkout@v2
+      
+    - name: Docker Login
+      run: docker login -p=${{ secrets.DOCKER_PASSWORD }} -u=${{ secrets.DOCKER_USERNAME }}
+
+    - name: Docker Build
+      run: docker build -t baigali/osssync:v0.0.0.${{ github.run_number }} .
+
+    - name: Docker Push
+      run: docker push baigali/osssync:v0.0.0.${{ github.run_number }}
