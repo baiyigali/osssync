@@ -3,6 +3,12 @@ on:
   workflow_dispatch:
   push:
     branches: ['master']
+
+env:
+    IMAGE_TAG: ${{ github.run_number }}
+    REGISTRY: ${{ secrets.REGISTRY }}
+    REGISTRY_USERNAME: ${{ secrets.DOCKER_REGISTRY_USERNAME }}
+    REGISTRY_PASSWORD: ${{ secrets.DOCKER_REGISTRY_PASSWORD }}
     
 jobs:
   build-and-push:
@@ -11,6 +17,15 @@ jobs:
     - name: Checkout Code
       uses: actions/checkout@v2
       
+    - name: Login to ACR
+      run: docker login -u $REGISTRY_USERNAME -p $REGISTRY_PASSWORD $REGISTRY
+
+    - name: Build image
+      run: docker build -t $REGISTRY:$IMAGE_TAG .
+
+    - name: Push image
+      run: docker push $REGISTRY:$IMAGE_TAG
+
     - name: Docker Login
       run: docker login -p=${{ secrets.DOCKER_PASSWORD }} -u=${{ secrets.DOCKER_USERNAME }}
 
