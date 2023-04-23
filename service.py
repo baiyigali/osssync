@@ -85,5 +85,5 @@ if __name__ == '__main__':
     oss_sync = OSSSync(access_key_id, access_key_secret, endpoint, bucket_name, ignore)
     oss_sync.download_dir(oss_dir, local_dir)
 
-    dir_watcher = DirWatcher(local_dir, oss_dir)
+    dir_watcher = DirWatcher(local_dir, oss_sync)
     dir_watcher.watch()
