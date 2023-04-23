@@ -21,7 +21,7 @@ class OSSSync:
                 self.bucket.get_object_to_file(
                     key, os.path.join(str(dst_dir), basename)
                 )            
-                print(f"Downloaded {key} to {local_path}")
+                print(f"Downloaded {key} to {dst_dir}")
 
     def upload_file(self, local_path, oss_path):
         with open(local_path, 'rb') as f:
