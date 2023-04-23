@@ -5,7 +5,7 @@ on:
     branches: ['master']
 
 env:
-    IMAGE_TAG: ${{ github.run_number }}
+    IMAGE_TAG: v0.0.0.${{ github.run_number }}
     REGISTRY: ${{ secrets.REGISTRY }}
     REGISTRY_USERNAME: ${{ secrets.DOCKER_REGISTRY_USERNAME }}
     REGISTRY_PASSWORD: ${{ secrets.DOCKER_REGISTRY_PASSWORD }}
@@ -30,7 +30,7 @@ jobs:
       run: docker login -p=${{ secrets.DOCKER_PASSWORD }} -u=${{ secrets.DOCKER_USERNAME }}
 
     - name: Docker Build
-      run: docker build -t baigali/osssync:v0.0.0.${{ github.run_number }} .
+      run: docker build -t baigali/osssync:$IMAGE_TAG .
 
     - name: Docker Push
-      run: docker push baigali/osssync:v0.0.0.${{ github.run_number }}
+      run: docker push baigali/osssync:$IMAGE_TAG
