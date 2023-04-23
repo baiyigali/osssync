@@ -6,7 +6,7 @@ on:
 
 env:
     IMAGE_TAG: v0.0.0.${{ github.run_number }}
-    REGISTRY: ${{ secrets.REGISTRY }}
+    REGISTRY: ${{ secrets.REGISTRY }}/osssync
     REGISTRY_USERNAME: ${{ secrets.DOCKER_REGISTRY_USERNAME }}
     REGISTRY_PASSWORD: ${{ secrets.DOCKER_REGISTRY_PASSWORD }}
     
@@ -16,7 +16,7 @@ jobs:
     steps:
     - name: Checkout Code
       uses: actions/checkout@v2
-      
+
     - name: Login to ACR
       run: docker login -u $REGISTRY_USERNAME -p $REGISTRY_PASSWORD $REGISTRY
 
