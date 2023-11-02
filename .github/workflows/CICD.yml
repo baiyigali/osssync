@@ -25,12 +25,3 @@ jobs:
 
     - name: Push image
       run: docker push $REGISTRY:$IMAGE_TAG
-
-    - name: Docker Login
-      run: docker login -p=${{ secrets.DOCKER_PASSWORD }} -u=${{ secrets.DOCKER_USERNAME }}
-
-    - name: Docker Build
-      run: docker build -t baigali/osssync:$IMAGE_TAG .
-
-    - name: Docker Push
-      run: docker push baigali/osssync:$IMAGE_TAG
