@@ -6,7 +6,7 @@ on:
 
 env:
     IMAGE_TAG: v0.0.0.${{ github.run_number }}
-    REGISTRY: ${{ secrets.REGISTRY }}/osssync
+    REGISTRY: registry.cn-zhangjiakou.aliyuncs.com/baiyigali/osssync
     REGISTRY_USERNAME: ${{ secrets.DOCKER_REGISTRY_USERNAME }}
     REGISTRY_PASSWORD: ${{ secrets.DOCKER_REGISTRY_PASSWORD }}
     
